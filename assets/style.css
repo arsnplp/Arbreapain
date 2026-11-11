@@ -365,3 +365,10 @@ blockquote{margin:2.2rem 0;padding:0 0 0 1.4rem;border-left:2px solid var(--gold
   .stack-nav button{font:500 .92rem var(--body);color:#EBDCCB;background:none;border:0;border-radius:999px;padding:.55em 1.1em;cursor:pointer;transition:background .25s,color .25s}
   .stack-nav button[aria-current=true]{background:#D4AF37;color:#2B1810}
 }
+
+/* Boutons principaux : sobres, sans or */
+.btn-gold{background:var(--cocoa);color:var(--cream);font-weight:500;border-color:var(--cocoa);box-shadow:none;text-shadow:none}
+.btn-gold:hover{background:var(--terra-deep);border-color:var(--terra-deep);color:var(--cream)}
+.chef .btn-gold,.cta .btn-gold{background:var(--cream);color:var(--cocoa);border-color:var(--cream)}
+.chef .btn-gold:hover,.cta .btn-gold:hover{background:var(--sand);border-color:var(--sand);color:var(--cocoa)}
+.lb-close{background:var(--cream);color:var(--cocoa);font-weight:500}
