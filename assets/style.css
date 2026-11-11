@@ -299,3 +299,10 @@ blockquote{margin:2.2rem 0;padding:0 0 0 1.4rem;border-left:2px solid var(--gold
 .chef-video{width:100%}
 .chef-video .seal{right:clamp(-48px,-3vw,-14px);bottom:clamp(-52px,-3.5vw,-20px);width:clamp(104px,11vw,150px);height:clamp(104px,11vw,150px)}
 @media (max-width:860px){.chef-in{grid-template-columns:1fr;gap:4.5rem}.chef-video .seal{right:-6px;bottom:-40px}}
+
+/* Section sur fond terracotta */
+.sec-terra{background:var(--terra);color:#FBE9DC}
+.sec-terra h2,.sec-terra h3{color:var(--cream)}
+.sec-terra .more{color:#F3DC86}
+.sec-terra .arch{box-shadow:0 30px 60px -24px rgba(43,24,16,.6)}
+.sec-terra+.ribbon-sec{padding-top:clamp(3.5rem,8vw,6rem)}

@@ -196,7 +196,7 @@ pages["index.html"] = layout(
   </div>
 </section>
 
-<section class="sec">
+<section class="sec sec-terra">
   <div class="wrap">
     <div class="sec-head">
       <h2>Trois savoir-faire, une même exigence</h2>
