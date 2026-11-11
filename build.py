@@ -193,7 +193,6 @@ pages["index.html"] = layout(
   </div>
   <div class="hero-img">
     {img(r, "hero-plateau", "Plateau de trompe-l'œil et de pâtisseries L'Arbre à Pain : cacahuète, framboise, cabosse, pistache, éclair et entremets", eager=True)}
-    {SEAL}
   </div>
 </section>
 
@@ -244,14 +243,13 @@ pages["index.html"] = layout(
   </div>
 </section>
 
-<section class="chef">
+<section class="chef" aria-label="Béchir Hamed, 28 ans d'expérience">
   <div class="wrap chef-in">
-    {arch(r, "chef-geste", "Béchir Hamed en plein glaçage dans le laboratoire", "arch-lg")}
-    <div>
-      <h2>Béchir Hamed, 28 ans de pâtisserie dans les mains</h2>
-      <p>Derrière chaque vitrine, il y a un artisan présent au quotidien. Pâtissier reconnu à l'international et formateur, Béchir Hamed transmet son métier autant qu'il le pratique. Sa règle n'a pas changé depuis ses débuts : si ce n'est pas beau et bon à la fois, ça ne sort pas du laboratoire.</p>
-      <a class="btn btn-gold" href="bechir-hamed.html">Rencontrer le chef</a>
+    <div class="chef-video">
+      <video src="assets/chef.mp4" poster="images/chef-video.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Béchir Hamed au travail dans le laboratoire"></video>
+      {SEAL}
     </div>
+    <a class="btn btn-gold" href="bechir-hamed.html">Rencontrer Béchir Hamed</a>
   </div>
 </section>
 
