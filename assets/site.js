@@ -63,3 +63,30 @@ if (document.body.classList.contains('home')) {
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 }
+
+// Ingrédients : les cartes s'empilent, la carte recouverte recule et la photo glisse doucement
+const stackCards = [...document.querySelectorAll('.stack-card')];
+if (stackCards.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const vh = window.innerHeight;
+    stackCards.forEach((card, i) => {
+      const next = stackCards[i + 1];
+      let cover = 0;
+      if (next) {
+        const top = next.getBoundingClientRect().top;
+        cover = Math.min(1, Math.max(0, 1 - (top - 70) / (vh - 70)));
+      }
+      card.style.transform = 'scale(' + (1 - cover * 0.06) + ')';
+      card.style.filter = 'brightness(' + (1 - cover * 0.45) + ')';
+      const r = card.getBoundingClientRect();
+      const enter = Math.min(1, Math.max(0, 1 - (r.top - 70) / (vh - 70)));
+      const img = card.querySelector('.stack-photo img');
+      if (img) img.style.transform = 'translateY(' + ((1 - enter) * 5 - cover * 4) + '%) scale(' + (1.08 - enter * 0.08) + ')';
+    });
+  };
+  window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+}

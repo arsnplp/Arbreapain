@@ -313,3 +313,32 @@ blockquote{margin:2.2rem 0;padding:0 0 0 1.4rem;border-left:2px solid var(--gold
 /* Photos rectangulaires */
 .rect .arch{border-radius:14px}
 .rect .arch img{border-radius:11px}
+
+/* ---------- Ingrédients : cartes qui s'empilent au défilement ---------- */
+.stack{--h:calc(100svh - 70px);position:relative;background:var(--cocoa)}
+.phero:not(.phero-slim)+.stack{margin-top:0}
+.stack-card{position:sticky;top:70px;height:var(--h);min-height:520px;display:grid;grid-template-columns:1.1fr 1fr;overflow:hidden;border-radius:28px 28px 0 0;box-shadow:0 -24px 50px -20px rgba(0,0,0,.55);transform-origin:50% 0;will-change:transform,filter}
+.stack-card:first-child{border-radius:0}
+.stack-photo{position:relative;overflow:hidden}
+.stack-photo img{position:absolute;inset:-6% 0;width:100%;height:112%;object-fit:cover;will-change:transform}
+.stack-txt{display:flex;flex-direction:column;justify-content:center;padding:clamp(1.6rem,6vw,6rem)}
+.stack-txt h2{font-size:clamp(2.2rem,5vw,4.4rem);margin-bottom:.4em}
+.stack-txt p{font-size:clamp(1.02rem,1.5vw,1.25rem);max-width:44ch}
+.stack-count{font-family:var(--display);font-size:1.1rem;letter-spacing:.08em;margin-bottom:1.2rem;opacity:.85}
+.stack-count::after{content:"";display:block;width:56px;height:2px;margin-top:.7rem;background:var(--or-line)}
+.sc-choco{background:var(--cocoa);color:#EBDCCB}.sc-choco h2{color:#E2C25A}
+.sc-fruits{background:var(--terra);color:#FBE9DC}.sc-fruits h2{color:var(--cream)}
+.sc-secs{background:var(--sand);color:var(--ink)}
+.sc-creme{background:var(--cream);color:var(--ink)}
+.sc-fruits .stack-photo,.sc-creme .stack-photo{order:2}
+@media (max-width:860px){
+  .stack-card{grid-template-columns:1fr;grid-template-rows:52% 1fr;border-radius:22px 22px 0 0}
+  .sc-fruits .stack-photo,.sc-creme .stack-photo{order:0}
+  .stack-txt{justify-content:flex-start;padding:1.5rem 22px 1.5rem}
+  .stack-count{margin-bottom:.7rem}
+  .stack-txt h2{font-size:clamp(1.9rem,8.5vw,2.6rem)}
+}
+@media (prefers-reduced-motion:reduce){.stack-card{position:relative;top:0;height:auto}.stack-photo{min-height:50vh}}
+.page-ingredients .phero .arch{margin-bottom:0}
+.stack-card:not(:last-child){margin-bottom:28vh}
+@media (prefers-reduced-motion:reduce){.stack-card:not(:last-child){margin-bottom:0}}

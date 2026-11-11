@@ -481,27 +481,23 @@ pages["ingredients.html"] = layout(
     "Vrais fruits, chocolat de couverture, pistache, beurre et crème : ce que nous mettons dans nos pâtisseries, et ce que nous refusons d'y mettre.",
     page_hero(r, "Ce qu'il y a dans nos pâtisseries", "Une belle pâtisserie avec de mauvais ingrédients, c'est juste un décor. Nous choisissons nos matières premières avant de dessiner quoi que ce soit.", "tarte-pistache", "Tarte à la pistache généreusement garnie")
     + f"""
-<section class="sec">
-  <div class="wrap">
-    <div class="rows">
-      <article class="row">
-        {arch(r, "tablette-chocolat", "Tablette de chocolat de couverture")}
-        <div><h2>Le chocolat</h2><p>Du chocolat de couverture, travaillé et tempéré chez nous pour les coques, les ganaches et les décors. C'est lui qui donne le croquant net d'un trompe-l'œil et la longueur en bouche d'un entremets.</p></div>
-      </article>
-      <article class="row rev">
-        {arch(r, "tarte-figue", "Tarte garnie de figues fraîches")}
-        <div><h2>Les fruits</h2><p>Des fruits frais, choisis mûrs, et des purées de fruits sans arôme ajouté. Fraise, framboise, figue, mangue, citron : la carte suit les saisons, parce qu'un fruit hors saison n'a pas de goût.</p></div>
-      </article>
-      <article class="row">
-        {arch(r, "pistache-mains", "Cœur coulant à la pistache")}
-        <div><h2>Les fruits secs</h2><p>Pistache, noisette, amande, cacahuète. Nous les torréfions et préparons nos pralinés nous-mêmes pour obtenir ce goût profond, impossible à imiter.</p></div>
-      </article>
-      <article class="row rev">
-        {arch(r, "saint-honore", "Crème pochée sur un saint-honoré")}
-        <div><h2>Le beurre, la crème, les œufs</h2><p>Du vrai beurre, de la crème entière et de la vanille en gousse. Pas de préparation en poudre, pas de mélange tout prêt : nos crèmes sont montées chaque jour.</p></div>
-      </article>
-    </div>
-  </div>
+<section class="stack" aria-label="Nos ingrédients">
+  <article class="stack-card sc-choco">
+    <div class="stack-photo">{img(r, "tablette-chocolat", "Tablette de chocolat de couverture")}</div>
+    <div class="stack-txt"><p class="stack-count">1 / 4</p><h2>Le chocolat</h2><p>Du chocolat de couverture, travaillé et tempéré chez nous pour les coques, les ganaches et les décors. C'est lui qui donne le croquant net d'un trompe-l'œil et la longueur en bouche d'un entremets.</p></div>
+  </article>
+  <article class="stack-card sc-fruits">
+    <div class="stack-photo">{img(r, "tarte-figue", "Tarte garnie de figues fraîches")}</div>
+    <div class="stack-txt"><p class="stack-count">2 / 4</p><h2>Les fruits</h2><p>Des fruits frais, choisis mûrs, et des purées de fruits sans arôme ajouté. Fraise, framboise, figue, mangue, citron : la carte suit les saisons, parce qu'un fruit hors saison n'a pas de goût.</p></div>
+  </article>
+  <article class="stack-card sc-secs">
+    <div class="stack-photo">{img(r, "pistache-mains", "Cœur coulant à la pistache")}</div>
+    <div class="stack-txt"><p class="stack-count">3 / 4</p><h2>Les fruits secs</h2><p>Pistache, noisette, amande, cacahuète. Nous les torréfions et préparons nos pralinés nous-mêmes pour obtenir ce goût profond, impossible à imiter.</p></div>
+  </article>
+  <article class="stack-card sc-creme">
+    <div class="stack-photo">{img(r, "saint-honore", "Crème pochée sur un saint-honoré")}</div>
+    <div class="stack-txt"><p class="stack-count">4 / 4</p><h2>Le beurre, la crème, les œufs</h2><p>Du vrai beurre, de la crème entière et de la vanille en gousse. Pas de préparation en poudre, pas de mélange tout prêt : nos crèmes sont montées chaque jour.</p></div>
+  </article>
 </section>
 <section class="sec sec-tint">
   <div class="wrap narrow center">
@@ -511,6 +507,7 @@ pages["ingredients.html"] = layout(
   </div>
 </section>
 {cta(r)}""",
+    cls="page-ingredients",
 )
 
 # ------------------------------------------------------------- CONTACT
