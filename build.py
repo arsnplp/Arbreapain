@@ -394,30 +394,19 @@ pages["boulangerie-tradition.html"] = layout(
     "Pains, viennoiseries, éclairs, tartes, sandwichs et focaccias : la boulangerie pâtisserie artisanale de L'Arbre à Pain, 100 % fait maison, à Mimet et Aix-en-Provence.",
     page_hero(r, "La tradition, le salé et le sucré", "Avant d'être une maison de trompe-l'œil, nous sommes une boulangerie pâtisserie. Le pain du matin, l'éclair de quatre heures et le déjeuner sur le pouce comptent autant que le reste.", "baguettes", "Baguettes de tradition sorties du four")
     + f"""
-<section class="trad" aria-label="Ce que vous trouvez en boutique">
-  <article class="trad-panel is-active" tabindex="0">
-    {img(r, "eclairs", "Éclairs au chocolat et au café")}
-    <div class="trad-txt"><h2>Pâtisserie traditionnelle</h2><p>Éclairs, saint-honorés, tartes aux fruits, flans, macarons garnis. Les classiques français, avec le même soin de finition que nos créations les plus spectaculaires.</p></div>
+<section class="reel" aria-label="Ce que vous trouvez en boutique">
+  <article class="reel-row">
+    <div class="wrap reel-head"><h2>Pâtisserie traditionnelle</h2><p>Éclairs, saint-honorés, tartes aux fruits, flans, macarons garnis. Les classiques français, avec le même soin de finition que nos créations les plus spectaculaires.</p></div>
+    <div class="reel-strip"><div class="reel-track"><button class="shot" type="button" aria-label="Agrandir : {e("Éclairs au chocolat et au café")}">{img(r, "eclairs", "Éclairs au chocolat et au café")}</button><button class="shot" type="button" aria-label="Agrandir : {e("Saint-honoré")}">{img(r, "saint-honore", "Saint-honoré")}</button><button class="shot" type="button" aria-label="Agrandir : {e("Tartelettes aux fruits")}">{img(r, "tartelettes", "Tartelettes aux fruits")}</button><button class="shot" type="button" aria-label="Agrandir : {e("Macaron framboise")}">{img(r, "ispahan", "Macaron framboise")}</button><button class="shot" type="button" aria-label="Agrandir : {e("Tartes aux fraises")}">{img(r, "tartes-vitrine", "Tartes aux fraises")}</button><button class="shot" type="button" aria-label="Agrandir : {e("Choux au chocolat")}">{img(r, "choux-chocolat", "Choux au chocolat")}</button><button class="shot" type="button" aria-label="Agrandir : {e("Verrines aux fruits")}">{img(r, "verrines", "Verrines aux fruits")}</button></div></div>
   </article>
-  <article class="trad-panel" tabindex="0">
-    {img(r, "roules-cannelle", "Roulés à la cannelle dorés")}
-    <div class="trad-txt"><h2>Pains et viennoiseries</h2><p>Baguettes de tradition, pains spéciaux, croissants, roulés et palmiers. Façonnés et cuits sur place, tout au long de la journée.</p></div>
+  <article class="reel-row rev">
+    <div class="wrap reel-head"><h2>Pains et viennoiseries</h2><p>Baguettes de tradition, pains spéciaux, croissants, roulés et palmiers. Façonnés et cuits sur place, tout au long de la journée.</p></div>
+    <div class="reel-strip"><div class="reel-track"><button class="shot" type="button" aria-label="Agrandir : {e("Pains façonnés")}">{img(r, "pains", "Pains façonnés")}</button><button class="shot" type="button" aria-label="Agrandir : {e("Roulés à la cannelle")}">{img(r, "roules-cannelle", "Roulés à la cannelle")}</button><button class="shot" type="button" aria-label="Agrandir : {e("Palmiers et feuilletés")}">{img(r, "palmiers", "Palmiers et feuilletés")}</button><button class="shot" type="button" aria-label="Agrandir : {e("Baguettes de tradition")}">{img(r, "baguettes", "Baguettes de tradition")}</button><button class="shot" type="button" aria-label="Agrandir : {e("Viennoiseries et café en terrasse")}">{img(r, "petit-dejeuner", "Viennoiseries et café en terrasse")}</button><button class="shot" type="button" aria-label="Agrandir : {e("Cookies pistache")}">{img(r, "cookies-pistache", "Cookies pistache")}</button></div></div>
   </article>
-  <article class="trad-panel" tabindex="0">
-    {img(r, "focaccia", "Focaccia décorée de légumes et d'herbes")}
-    <div class="trad-txt"><h2>Le salé</h2><p>Sandwichs, focaccias, parts salées et plats du jour pour le déjeuner. À emporter, ou à savourer en terrasse avec un café.</p></div>
+  <article class="reel-row">
+    <div class="wrap reel-head"><h2>Le salé</h2><p>Sandwichs, focaccias, parts salées et plats du jour pour le déjeuner. À emporter, ou à savourer en terrasse avec un café.</p></div>
+    <div class="reel-strip"><div class="reel-track"><button class="shot" type="button" aria-label="Agrandir : {e("Focaccia aux légumes et herbes")}">{img(r, "focaccia", "Focaccia aux légumes et herbes")}</button><button class="shot" type="button" aria-label="Agrandir : {e("Sandwichs frais")}">{img(r, "sandwichs", "Sandwichs frais")}</button><button class="shot" type="button" aria-label="Agrandir : {e("Part salée à la pistache")}">{img(r, "sale-pistache", "Part salée à la pistache")}</button><button class="shot" type="button" aria-label="Agrandir : {e("Sandwich garni")}">{img(r, "sandwich", "Sandwich garni")}</button><button class="shot" type="button" aria-label="Agrandir : {e("Plat du jour aux gambas")}">{img(r, "plat-gambas", "Plat du jour aux gambas")}</button></div></div>
   </article>
-</section>
-<section class="sec sec-tint">
-  <div class="wrap">
-    <div class="sec-head"><h2>Un tour en boutique</h2><p>Touchez une photo pour l'agrandir.</p></div>
-    {gallery(r, [
-      ("pains", "Pains façonnés avant cuisson"), ("tartelettes", "Tartelettes aux fruits"), ("palmiers", "Palmiers et galettes feuilletées"),
-      ("sandwichs", "Sandwichs frais"), ("petit-dejeuner", "Petit-déjeuner en terrasse, viennoiseries et café"), ("ispahan", "Macaron framboise"),
-      ("cookies-pistache", "Cookies pistache"), ("tartes-vitrine", "Tartes aux fraises en vitrine"), ("choux-chocolat", "Choux au chocolat"),
-      ("verrines", "Verrines aux fruits"), ("sandwich", "Sandwich garni"), ("vitrine-gateaux", "Vitrine de pâtisseries"),
-    ])}
-  </div>
 </section>
 {cta(r, "Une commande pour le week-end ?", "Pains spéciaux, plateaux salés, tartes et gâteaux : réservez à l'avance et passez simplement les récupérer.")}""",
     cls="page-tradition",

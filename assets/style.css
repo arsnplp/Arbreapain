@@ -405,3 +405,19 @@ blockquote{margin:2.2rem 0;padding:0 0 0 1.4rem;border-left:2px solid var(--gold
   .trad.anim .trad-panel.seen .trad-txt{opacity:1;transform:none}
   .trad.anim .trad-panel.seen .trad-txt p{opacity:1;transform:none}
 }
+
+/* ---------- Tradition : bandes de photos qui glissent au défilement ---------- */
+.reel{padding-block:clamp(2.5rem,6vw,5rem) clamp(1rem,3vw,2rem);overflow:hidden}
+.reel-row{padding-block:clamp(1.6rem,4vw,3rem)}
+.reel-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(1rem,5vw,5rem);align-items:end;margin-bottom:clamp(1.2rem,2.5vw,2rem);padding-top:1.4rem;background:var(--or-line) top/100% 2px no-repeat}
+.reel-head h2{margin:0;font-size:clamp(2rem,4.4vw,4rem);font-style:italic}
+.reel-head p{margin:0;font-size:clamp(1rem,1.25vw,1.15rem)}
+.reel-strip{overflow:hidden}
+.reel-track{display:flex;gap:14px;width:max-content;padding-inline:20px;will-change:transform}
+.reel-track .shot{flex:none;width:clamp(170px,19vw,280px);aspect-ratio:4/5;border-radius:12px}
+.reel-row.anim .reel-head{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.reel-row.anim.seen .reel-head{opacity:1;transform:none}
+@media (max-width:860px){
+  .reel-head{grid-template-columns:1fr;gap:.7rem}
+  .reel-track .shot{width:46vw}
+}
