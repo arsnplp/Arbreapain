@@ -435,16 +435,21 @@ pages["bechir-hamed.html"] = layout(
     page_hero(r, "Béchir Hamed, pâtissier et formateur", "28 ans de métier, des créations reconnues bien au-delà de la Provence, et toujours la même envie : apprendre, refaire, transmettre.", "chef-gateau", "Béchir Hamed présentant un saint-honoré")
     + f"""
 <section class="sec">
-  <div class="wrap narrow">
-    <h2>Un artisan, tous les jours au laboratoire</h2>
-    <p>Béchir Hamed n'a jamais quitté le plan de travail. Depuis 28 ans, il pétrit, tempère, poche et glace, avec une idée fixe : une pâtisserie doit donner envie avant même d'être goûtée, et tenir sa promesse à la première bouchée.</p>
-    <p>C'est cette exigence qui a donné naissance aux trompe-l'œil de la maison. Des fruits plus vrais que nature, travaillés comme des sculptures, mais pensés d'abord pour le goût.</p>
-    <blockquote>« Le visuel attire. Le goût fait revenir. Il faut les deux, sinon ce n'est pas de la pâtisserie. »</blockquote>
+  <div class="wrap split">
+    <div class="vframe">
+      <video src="assets/artisan.mp4" poster="images/artisan-video.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Glaçage d'un entremets tout chocolat par Béchir Hamed"></video>
+    </div>
+    <div>
+      <h2>Un artisan, tous les jours au laboratoire</h2>
+      <p>Béchir Hamed n'a jamais quitté le plan de travail. Depuis 28 ans, il pétrit, tempère, poche et glace, avec une idée fixe : une pâtisserie doit donner envie avant même d'être goûtée, et tenir sa promesse à la première bouchée.</p>
+      <p>C'est cette exigence qui a donné naissance aux trompe-l'œil de la maison. Des fruits plus vrais que nature, travaillés comme des sculptures, mais pensés d'abord pour le goût.</p>
+      <blockquote>« Le visuel attire. Le goût fait revenir. Il faut les deux, sinon ce n'est pas de la pâtisserie. »</blockquote>
+    </div>
   </div>
 </section>
 <section class="sec sec-tint">
   <div class="wrap split">
-    <div class="duo">
+    <div class="duo rect">
       {arch(r, "chef-geste", "Glaçage d'un entremets au laboratoire")}
       {arch(r, "chocolat-coule", "Travail du chocolat sur marbre", "down")}
     </div>

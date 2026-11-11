@@ -306,3 +306,10 @@ blockquote{margin:2.2rem 0;padding:0 0 0 1.4rem;border-left:2px solid var(--gold
 .sec-terra .more{color:#F3DC86}
 .sec-terra .arch{box-shadow:0 30px 60px -24px rgba(43,24,16,.6)}
 .sec-terra+.ribbon-sec{padding-top:clamp(3.5rem,8vw,6rem)}
+
+/* Vidéo verticale encadrée */
+.vframe{justify-self:center;width:min(380px,100%);padding:3px;background:var(--or);border-radius:18px;box-shadow:0 30px 60px -28px rgba(43,24,16,.55)}
+.vframe video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:15px;background:#1E100A}
+/* Photos rectangulaires */
+.rect .arch{border-radius:14px}
+.rect .arch img{border-radius:11px}
