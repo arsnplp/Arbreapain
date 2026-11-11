@@ -228,17 +228,11 @@ blockquote{margin:2.2rem 0;padding:0 0 0 1.4rem;border-left:2px solid var(--gold
   --or:linear-gradient(120deg,#9A7016 0%,#E6C35C 18%,#FFF6C9 34%,#D4AF37 50%,#A47A1E 68%,#F3DC86 86%,#B8892B 100%);
   --or-line:linear-gradient(90deg,#9A7016,#F3DC86 30%,#FFF6C9 50%,#D4AF37 70%,#9A7016);
 }
-/* Boutons : lingot d'or avec reflet qui passe */
-.btn-gold{position:relative;overflow:hidden;isolation:isolate;background:var(--or);background-size:180% 100%;background-position:20% 0;color:#2B1810;font-weight:600;border-color:#8A6412;box-shadow:inset 0 1px 0 rgba(255,255,255,.65),inset 0 -2px 3px rgba(122,84,10,.45),0 8px 22px -10px rgba(43,24,16,.6);text-shadow:0 1px 0 rgba(255,246,201,.6);transition:background-position .6s ease,box-shadow .3s}
-.btn-gold:hover{background:var(--or);background-size:180% 100%;background-position:80% 0}
-.btn-gold::after{content:"";position:absolute;inset:-20% auto -20% -60%;width:38%;z-index:-1;background:linear-gradient(100deg,transparent,rgba(255,255,255,.85),transparent);transform:skewX(-20deg);pointer-events:none}
-.btn-gold:hover::after{animation:reflet .9s ease}
-.hero .btn-gold::after,.cta .btn-gold::after{animation:reflet 5.5s ease-in-out 1.2s infinite}
-@keyframes reflet{0%{left:-60%}22%,100%{left:130%}}
-/* Titres dorés sur fonds sombres : texte en or avec reflet lent */
-.chef h2,.cta h2,.foot h2,.foot-brand{background:var(--or);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:eclat 9s ease-in-out infinite alternate}
-.foot-brand .mono{-webkit-text-fill-color:#F3DC86}
-@keyframes eclat{from{background-position:0 0}to{background-position:100% 0}}
+/* Boutons : or uni, sans reflet */
+.btn-gold{background:#D4AF37;color:#2B1810;font-weight:600;border-color:#B8922A;box-shadow:0 8px 22px -12px rgba(43,24,16,.6)}
+.btn-gold:hover{background:#E2C25A}
+/* Titres dorés sur fonds sombres : or uni */
+.chef h2,.cta h2,.foot h2,.foot-brand{color:#E2C25A}
 /* Arches : cadre en or */
 .arch{padding:3px;background:var(--or);box-shadow:0 18px 40px -22px rgba(43,24,16,.5)}
 .arch img{border-radius:999px 999px 11px 11px}
@@ -260,4 +254,4 @@ blockquote{margin:2.2rem 0;padding:0 0 0 1.4rem;border-left:2px solid var(--gold
 /* Sceau */
 .seal{background:radial-gradient(circle at 35% 30%,#3A2117,#1E100A);box-shadow:0 0 0 3px #1E100A,0 0 0 5px #D4AF37,0 16px 34px -10px rgba(0,0,0,.6)}
 .seal-ring,.seal-num,.seal-sub{fill:url(#or)}
-.lb-close{background:var(--or);font-weight:600}
+.lb-close{background:#D4AF37;font-weight:600}
