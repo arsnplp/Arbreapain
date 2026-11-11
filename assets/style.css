@@ -278,3 +278,10 @@ blockquote{margin:2.2rem 0;padding:0 0 0 1.4rem;border-left:2px solid var(--gold
 }
 @font-face{font-family:"Anton";src:url("anton.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 .hero h1{white-space:nowrap}
+
+/* Accueil : le menu n'apparaît qu'au défilement */
+.home .top{position:fixed;left:0;right:0;top:0;transform:translateY(-110%);transition:transform .35s ease}
+.home.scrolled .top,.home .top:focus-within{transform:none}
+.home .hero{min-height:100vh}
+.hero-txt{padding-bottom:clamp(2.5rem,5vw,5rem)}
+@media (max-width:860px){.home .hero{min-height:0}}

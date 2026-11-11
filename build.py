@@ -195,7 +195,6 @@ pages["index.html"] = layout(
     {img(r, "hero-plateau", "Plateau de trompe-l'œil et de pâtisseries L'Arbre à Pain : cacahuète, framboise, cabosse, pistache, éclair et entremets", eager=True)}
     {SEAL}
   </div>
-  <a class="btn btn-gold hero-cta" href="contact.html">Demander un devis</a>
 </section>
 
 <section class="sec">

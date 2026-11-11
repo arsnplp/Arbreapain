@@ -56,3 +56,10 @@ if (form) {
     }
   });
 }
+
+// Accueil : affiche le menu dès qu'on commence à défiler
+if (document.body.classList.contains('home')) {
+  const onScroll = () => document.body.classList.toggle('scrolled', window.scrollY > 20);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
