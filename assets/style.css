@@ -1,7 +1,7 @@
 /* L'Arbre à Pain : terracotta + or, arches inspirées des niches de la boutique d'Aix */
 :root{
   --terra:#B4532F; --terra-deep:#8E3D20; --cocoa:#2B1810; --cream:#FBF4EA; --sand:#F1E3D0;
-  --gold:#C9A25B; --gold-soft:#E4CB93; --ink:#3A2A22;
+  --gold:#D4AF37; --gold-soft:#F3DC86; --ink:#3A2A22;
   --display:"Bodoni Moda","Didot","Times New Roman",serif;
   --body:"Jost","Helvetica Neue",Arial,sans-serif;
   --wrap:1200px;
@@ -58,7 +58,7 @@ a:hover .arch img,.arch:hover img{transform:scale(1.05)}
 /* Hero accueil */
 .hero{background:var(--terra);color:var(--cream);overflow:hidden;position:relative}
 .hero::after{content:"";position:absolute;inset:auto 0 0 0;height:90px;background:var(--cream);border-radius:50% 50% 0 0/100% 100% 0 0}
-.hero-in{width:min(1380px,100% - 40px);display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(2rem,5vw,5rem);align-items:center;padding-block:clamp(3rem,7vw,6rem) clamp(7rem,12vw,11rem);position:relative;z-index:1}
+.hero-in{width:min(1380px,100% - clamp(40px,8vw,120px));display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(2rem,5vw,5rem);align-items:center;padding-block:clamp(3rem,7vw,6rem) clamp(7rem,12vw,11rem);position:relative;z-index:1}
 .hero h1{color:var(--cream);font-size:clamp(2.7rem,6.2vw,5.4rem)}
 .hero .lead{font-size:1.2rem;color:#FBE9DC;max-width:46ch}
 .hero-actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.8rem}
@@ -68,7 +68,7 @@ a:hover .arch img,.arch:hover img{transform:scale(1.05)}
 .hero-arches .a2{aspect-ratio:3/5}
 .hero-arches .a3{transform:translateY(70px)}
 .seal{position:absolute;left:-56px;bottom:-78px;width:150px;height:150px;color:var(--gold-soft);background:var(--terra-deep);border-radius:50%;animation:spin 40s linear infinite}
-.seal-ring{font-family:var(--body);font-size:11.5px;letter-spacing:2.2px;fill:currentColor;text-transform:none}
+.seal-ring{font-family:var(--body);font-size:11px;fill:currentColor;text-transform:none}
 .seal-num{font-family:var(--display);font-size:46px;fill:currentColor}
 .seal-sub{font-family:var(--body);font-size:11px;fill:currentColor;letter-spacing:.5px}
 .seal text:not(.seal-ring){animation:spin 40s linear infinite reverse;transform-origin:100px 100px}
@@ -222,3 +222,42 @@ blockquote{margin:2.2rem 0;padding:0 0 0 1.4rem;border-left:2px solid var(--gold
   *{animation:none!important;transition:none!important}
   html{scroll-behavior:auto}
 }
+
+/* ---------- Or métallisé ---------- */
+:root{
+  --or:linear-gradient(120deg,#9A7016 0%,#E6C35C 18%,#FFF6C9 34%,#D4AF37 50%,#A47A1E 68%,#F3DC86 86%,#B8892B 100%);
+  --or-line:linear-gradient(90deg,#9A7016,#F3DC86 30%,#FFF6C9 50%,#D4AF37 70%,#9A7016);
+}
+/* Boutons : lingot d'or avec reflet qui passe */
+.btn-gold{position:relative;overflow:hidden;isolation:isolate;background:var(--or);background-size:180% 100%;background-position:20% 0;color:#2B1810;font-weight:600;border-color:#8A6412;box-shadow:inset 0 1px 0 rgba(255,255,255,.65),inset 0 -2px 3px rgba(122,84,10,.45),0 8px 22px -10px rgba(43,24,16,.6);text-shadow:0 1px 0 rgba(255,246,201,.6);transition:background-position .6s ease,box-shadow .3s}
+.btn-gold:hover{background:var(--or);background-size:180% 100%;background-position:80% 0}
+.btn-gold::after{content:"";position:absolute;inset:-20% auto -20% -60%;width:38%;z-index:-1;background:linear-gradient(100deg,transparent,rgba(255,255,255,.85),transparent);transform:skewX(-20deg);pointer-events:none}
+.btn-gold:hover::after{animation:reflet .9s ease}
+.hero .btn-gold::after,.cta .btn-gold::after{animation:reflet 5.5s ease-in-out 1.2s infinite}
+@keyframes reflet{0%{left:-60%}22%,100%{left:130%}}
+/* Titres dorés sur fonds sombres : texte en or avec reflet lent */
+.chef h2,.cta h2,.foot h2,.foot-brand{background:var(--or);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:eclat 9s ease-in-out infinite alternate}
+.foot-brand .mono{-webkit-text-fill-color:#F3DC86}
+@keyframes eclat{from{background-position:0 0}to{background-position:100% 0}}
+/* Arches : cadre en or */
+.arch{padding:3px;background:var(--or);box-shadow:0 18px 40px -22px rgba(43,24,16,.5)}
+.arch img{border-radius:999px 999px 11px 11px}
+.hero-arches .arch,.phero .arch{padding:4px;box-shadow:0 30px 60px -20px rgba(43,24,16,.6),0 0 0 1px rgba(255,246,201,.25)}
+.article-img img{border:3px solid transparent;background:var(--or) border-box}
+/* Monogramme, filets et séparateurs */
+.mono{border:0;background:linear-gradient(var(--cream),var(--cream)) padding-box,var(--or) border-box;border:1.5px solid transparent}
+.foot .mono{background:linear-gradient(var(--cocoa),var(--cocoa)) padding-box,var(--or) border-box}
+.top{border-bottom:0}
+.top::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--or-line)}
+.cols3>div,.steps li{border-top:0;position:relative}
+.cols3>div::before,.steps li::after{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--or-line)}
+.shops li,blockquote{border-left:0;position:relative}
+.shops li::before,blockquote::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#9A7016,#FFF6C9 45%,#D4AF37 60%,#9A7016)}
+.menu a:not(.btn):hover,.menu a[aria-current]{border-image:var(--or-line) 1}
+.more{border-bottom:0;background:var(--or-line) left bottom/100% 2px no-repeat;padding-bottom:4px}
+.foot-legal{border-top:0;background:var(--or-line) top/100% 1px no-repeat}
+.hero::before{content:"";position:absolute;left:0;right:0;bottom:88px;height:0}
+/* Sceau */
+.seal{background:radial-gradient(circle at 35% 30%,#3A2117,#1E100A);box-shadow:0 0 0 3px #1E100A,0 0 0 5px #D4AF37,0 16px 34px -10px rgba(0,0,0,.6)}
+.seal-ring,.seal-num,.seal-sub{fill:url(#or)}
+.lb-close{background:var(--or);font-weight:600}
