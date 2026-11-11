@@ -293,3 +293,9 @@ blockquote{margin:2.2rem 0;padding:0 0 0 1.4rem;border-left:2px solid var(--gold
 .chef-video .seal{left:auto;right:clamp(-56px,-4vw,-14px);top:auto;bottom:clamp(-56px,-4vw,-20px);width:clamp(110px,14vw,170px);height:clamp(110px,14vw,170px)}
 .chef .btn{margin-top:clamp(.5rem,2vw,1.5rem)}
 @media (max-width:860px){.chef-video .seal{right:-6px;bottom:-40px}}
+
+/* Section du chef : vidéo à gauche, texte à droite */
+.chef-in{display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:clamp(3rem,7vw,6.5rem)}
+.chef-video{width:100%}
+.chef-video .seal{right:clamp(-48px,-3vw,-14px);bottom:clamp(-52px,-3.5vw,-20px);width:clamp(104px,11vw,150px);height:clamp(104px,11vw,150px)}
+@media (max-width:860px){.chef-in{grid-template-columns:1fr;gap:4.5rem}.chef-video .seal{right:-6px;bottom:-40px}}

@@ -243,13 +243,17 @@ pages["index.html"] = layout(
   </div>
 </section>
 
-<section class="chef" aria-label="Béchir Hamed, 28 ans d'expérience">
+<section class="chef">
   <div class="wrap chef-in">
     <div class="chef-video">
       <video src="assets/chef.mp4" poster="images/chef-video.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Béchir Hamed au travail dans le laboratoire"></video>
       {SEAL}
     </div>
-    <a class="btn btn-gold" href="bechir-hamed.html">Rencontrer Béchir Hamed</a>
+    <div class="chef-txt">
+      <h2>Béchir Hamed, 28 ans de pâtisserie dans les mains</h2>
+      <p>Derrière chaque vitrine, il y a un artisan présent au quotidien. Pâtissier reconnu à l'international et formateur, Béchir Hamed transmet son métier autant qu'il le pratique. Sa règle n'a pas changé depuis ses débuts : si ce n'est pas beau et bon à la fois, ça ne sort pas du laboratoire.</p>
+      <a class="btn btn-gold" href="bechir-hamed.html">Rencontrer le chef</a>
+    </div>
   </div>
 </section>
 
