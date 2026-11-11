@@ -394,23 +394,19 @@ pages["boulangerie-tradition.html"] = layout(
     "Pains, viennoiseries, éclairs, tartes, sandwichs et focaccias : la boulangerie pâtisserie artisanale de L'Arbre à Pain, 100 % fait maison, à Mimet et Aix-en-Provence.",
     page_hero(r, "La tradition, le salé et le sucré", "Avant d'être une maison de trompe-l'œil, nous sommes une boulangerie pâtisserie. Le pain du matin, l'éclair de quatre heures et le déjeuner sur le pouce comptent autant que le reste.", "baguettes", "Baguettes de tradition sorties du four")
     + f"""
-<section class="sec">
-  <div class="wrap">
-    <div class="rows">
-      <article class="row">
-        {arch(r, "eclairs", "Éclairs au chocolat")}
-        <div><h2>Pâtisserie traditionnelle</h2><p>Éclairs, saint-honorés, tartes aux fruits, flans, macarons garnis. Les classiques français, avec le même soin de finition que nos créations les plus spectaculaires.</p></div>
-      </article>
-      <article class="row rev">
-        {arch(r, "roules-cannelle", "Roulés à la cannelle dorés")}
-        <div><h2>Pains et viennoiseries</h2><p>Baguettes de tradition, pains spéciaux, croissants, roulés et palmiers. Façonnés et cuits sur place, tout au long de la journée.</p></div>
-      </article>
-      <article class="row">
-        {arch(r, "focaccia", "Focaccia décorée de légumes et d'herbes")}
-        <div><h2>Le salé</h2><p>Sandwichs, focaccias, parts salées et plats du jour pour le déjeuner. À emporter, ou à savourer en terrasse avec un café.</p></div>
-      </article>
-    </div>
-  </div>
+<section class="trad" aria-label="Ce que vous trouvez en boutique">
+  <article class="trad-panel is-active" tabindex="0">
+    {img(r, "eclairs", "Éclairs au chocolat et au café")}
+    <div class="trad-txt"><h2>Pâtisserie traditionnelle</h2><p>Éclairs, saint-honorés, tartes aux fruits, flans, macarons garnis. Les classiques français, avec le même soin de finition que nos créations les plus spectaculaires.</p></div>
+  </article>
+  <article class="trad-panel" tabindex="0">
+    {img(r, "roules-cannelle", "Roulés à la cannelle dorés")}
+    <div class="trad-txt"><h2>Pains et viennoiseries</h2><p>Baguettes de tradition, pains spéciaux, croissants, roulés et palmiers. Façonnés et cuits sur place, tout au long de la journée.</p></div>
+  </article>
+  <article class="trad-panel" tabindex="0">
+    {img(r, "focaccia", "Focaccia décorée de légumes et d'herbes")}
+    <div class="trad-txt"><h2>Le salé</h2><p>Sandwichs, focaccias, parts salées et plats du jour pour le déjeuner. À emporter, ou à savourer en terrasse avec un café.</p></div>
+  </article>
 </section>
 <section class="sec sec-tint">
   <div class="wrap">
@@ -424,6 +420,7 @@ pages["boulangerie-tradition.html"] = layout(
   </div>
 </section>
 {cta(r, "Une commande pour le week-end ?", "Pains spéciaux, plateaux salés, tartes et gâteaux : réservez à l'avance et passez simplement les récupérer.")}""",
+    cls="page-tradition",
 )
 
 # ------------------------------------------------------------- BECHIR HAMED

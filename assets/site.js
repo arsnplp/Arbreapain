@@ -146,3 +146,36 @@ if (stackEl && stackCards.length && !window.matchMedia('(prefers-reduced-motion:
   window.addEventListener('resize', update);
   update();
 }
+
+// Tradition : volets qui s'ouvrent au survol, entrée animée, glissement des photos sur téléphone
+const trad = document.querySelector('.trad');
+if (trad) {
+  const panels = [...trad.querySelectorAll('.trad-panel')];
+  const activate = (p) => panels.forEach((x) => x.classList.toggle('is-active', x === p));
+  panels.forEach((p) => {
+    p.addEventListener('mouseenter', () => activate(p));
+    p.addEventListener('focus', () => activate(p));
+    p.addEventListener('click', () => activate(p));
+  });
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+    trad.classList.add('anim');
+    new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { trad.classList.add('in'); o.disconnect(); } }), { threshold: 0.2 }).observe(trad);
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) e.target.classList.add('seen'); }), { threshold: 0.45 });
+    panels.forEach((p) => io.observe(p));
+    const small = window.matchMedia('(max-width: 860px)');
+    let tick = false;
+    const slide = () => {
+      tick = false;
+      panels.forEach((p) => {
+        const img = p.querySelector('img');
+        if (!small.matches) { img.style.transform = ''; return; }
+        const r = p.getBoundingClientRect();
+        const k = (r.top + r.height / 2 - window.innerHeight / 2) / window.innerHeight;
+        img.style.transform = 'translateY(' + (k * -7).toFixed(2) + '%)';
+      });
+    };
+    window.addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(slide); } }, { passive: true });
+    window.addEventListener('resize', slide);
+    slide();
+  }
+}
