@@ -260,7 +260,7 @@ blockquote{margin:2.2rem 0;padding:0 0 0 1.4rem;border-left:2px solid var(--gold
 .hero{background:var(--cream);color:var(--ink);display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 70px);position:relative;overflow:visible}
 .hero::after,.hero::before{content:none}
 .hero-txt{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:clamp(2.5rem,5vw,5rem) clamp(20px,3vw,48px) clamp(5rem,8vw,7rem);animation:none}
-.hero h1{font-family:"Anton","Impact","Arial Narrow",sans-serif;font-weight:400;text-transform:uppercase;color:var(--terra-deep);font-size:clamp(3rem,7.4vw,7.6rem);line-height:1.24;letter-spacing:.005em;margin:0 0 .45em}
+.hero h1{font-family:"Anton","Impact","Arial Narrow",sans-serif;font-weight:400;text-transform:uppercase;color:var(--terra-deep);font-size:clamp(3rem,min(6.4vw,11.5vh),7rem);line-height:1.2;letter-spacing:.005em;margin:0 0 .45em}
 .hero .hl{position:relative;display:inline-block;z-index:0}
 .hero .hl::after{content:"";position:absolute;left:-4%;right:-4%;bottom:.02em;height:.2em;background:#E2C25A;z-index:-1;transform:skewX(-24deg) rotate(-1deg)}
 .hero .lead{color:var(--terra-deep);font-size:1.15rem;max-width:30ch;margin:0 auto 1rem}
