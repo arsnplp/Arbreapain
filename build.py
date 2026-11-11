@@ -186,22 +186,16 @@ pages["index.html"] = layout(
     "L'Arbre à Pain | Pâtisserie trompe-l'œil à Mimet et Aix-en-Provence",
     "Trompe-l'œil signature, pâtisserie fine pour vos événements et boulangerie artisanale. 28 ans d'expérience, 100 % fait maison, à Mimet et Aix-en-Provence.",
     f"""<section class="hero">
-  <div class="wrap hero-in">
-    <div class="hero-txt">
-      <h1>Vous croyez voir un fruit. C'est un dessert.</h1>
-      <p class="lead">Maison L'Arbre à Pain crée des trompe-l'œil à croquer, des pâtisseries fines pour vos événements et tout ce qu'on attend d'une vraie boulangerie. Fait maison, à Mimet et à Aix-en-Provence.</p>
-      <div class="hero-actions">
-        <a class="btn btn-gold" href="contact.html">Demander un devis</a>
-        <a class="btn btn-line" href="trompe-l-oeil.html">Voir les trompe-l'œil</a>
-      </div>
-    </div>
-    <div class="hero-arches">
-      {arch(r, "trompe-fraise", "Trompe-l'œil fraise, plus vrai que nature", "a1", eager=True)}
-      {arch(r, "trompe-planche", "Trompe-l'œil mangue, framboise et cacahuète présentés sur une planche", "a2", eager=True)}
-      {arch(r, "trompe-orange-mangue", "Trompe-l'œil orange et mangue en vitrine", "a3", eager=True)}
-      {SEAL}
-    </div>
+  <div class="hero-txt">
+    <h1>L'illusion<br>à regarder,<br>le vrai goût<br><span class="hl">à croquer</span></h1>
+    <p class="lead">Trompe-l'œil signature, pâtisserie fine et boulangerie artisanale. Fait maison, à Mimet et à Aix-en-Provence.</p>
+    <a class="link" href="trompe-l-oeil.html">Voir les trompe-l'œil</a>
   </div>
+  <div class="hero-img">
+    {img(r, "hero-plateau", "Plateau de trompe-l'œil et de pâtisseries L'Arbre à Pain : cacahuète, framboise, cabosse, pistache, éclair et entremets", eager=True)}
+    {SEAL}
+  </div>
+  <a class="btn btn-gold hero-cta" href="contact.html">Demander un devis</a>
 </section>
 
 <section class="sec">

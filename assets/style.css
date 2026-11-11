@@ -255,3 +255,26 @@ blockquote{margin:2.2rem 0;padding:0 0 0 1.4rem;border-left:2px solid var(--gold
 .seal{background:radial-gradient(circle at 35% 30%,#3A2117,#1E100A);box-shadow:0 0 0 3px #1E100A,0 0 0 5px #D4AF37,0 16px 34px -10px rgba(0,0,0,.6)}
 .seal-ring,.seal-num,.seal-sub{fill:url(#or)}
 .lb-close{background:#D4AF37;font-weight:600}
+
+/* ---------- Accueil : haut de page en deux volets ---------- */
+.hero{background:var(--cream);color:var(--ink);display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 70px);position:relative;overflow:visible}
+.hero::after,.hero::before{content:none}
+.hero-txt{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:clamp(2.5rem,5vw,5rem) clamp(20px,3vw,48px) clamp(5rem,8vw,7rem);animation:none}
+.hero h1{font-family:"Anton","Impact","Arial Narrow",sans-serif;font-weight:400;text-transform:uppercase;color:var(--terra-deep);font-size:clamp(3rem,7.4vw,7.6rem);line-height:1.24;letter-spacing:.005em;margin:0 0 .45em}
+.hero .hl{position:relative;display:inline-block;z-index:0}
+.hero .hl::after{content:"";position:absolute;left:-4%;right:-4%;bottom:.02em;height:.2em;background:#E2C25A;z-index:-1;transform:skewX(-24deg) rotate(-1deg)}
+.hero .lead{color:var(--terra-deep);font-size:1.15rem;max-width:30ch;margin:0 auto 1rem}
+.hero-img{position:relative;min-height:420px}
+.hero-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-img .seal{left:auto;right:clamp(14px,2.5vw,36px);top:clamp(14px,2.5vw,36px);bottom:auto;width:clamp(96px,10vw,140px);height:clamp(96px,10vw,140px)}
+.hero-cta{position:absolute;left:50%;bottom:clamp(1.5rem,4vw,3rem);transform:translateX(-50%);padding:1.05em 2.4em;font-size:1.1rem;white-space:nowrap;z-index:3;box-shadow:0 14px 34px -12px rgba(43,24,16,.55)}
+.hero+.sec{padding-top:clamp(3.5rem,8vw,7rem)}
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;min-height:0}
+  .hero-txt{padding:2.5rem 20px 2rem}
+  .hero h1{font-size:clamp(2.9rem,15vw,5rem)}
+  .hero-img{aspect-ratio:1;min-height:0}
+  .hero-cta{position:static;transform:none;justify-self:center;margin:-1.7rem auto 0}
+}
+@font-face{font-family:"Anton";src:url("anton.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+.hero h1{white-space:nowrap}
