@@ -305,7 +305,7 @@ pages["trompe-l-oeil.html"] = layout(
     "trompe-l-oeil.html",
     "Pâtisserie trompe-l'œil à Aix-en-Provence et Mimet | L'Arbre à Pain",
     "Pêche, citron, mangue, fraise, noisette : nos trompe-l'œil signature sont des desserts plus vrais que nature. À l'unité, en coffret ou en format XL sur commande.",
-    page_hero(r, "Le trompe-l'œil, notre signature", "Un citron qui n'est pas un citron. Une cacahuète grande comme la main. Des desserts sculptés pour surprendre l'œil, puis le palais.", "trompe-peches", "Trompe-l'œil pêches à la peau veloutée")
+    page_hero(r, "Le trompe-l'œil, notre signature", "Un citron qui n'est pas un citron. Une cacahuète grande comme la main. Des desserts sculptés pour surprendre l'œil, puis le palais.", "trompe-vitrine", "Vitrine de trompe-l'œil de L'Arbre à Pain : fraises, pêches, mangues, cacahuètes et cabosses")
     + f"""
 <section class="sec">
   <div class="wrap split">
