@@ -482,19 +482,19 @@ pages["ingredients.html"] = layout(
     page_hero(r, "Ce qu'il y a dans nos pâtisseries", "Une belle pâtisserie avec de mauvais ingrédients, c'est juste un décor. Nous choisissons nos matières premières avant de dessiner quoi que ce soit.", "tarte-pistache", "Tarte à la pistache généreusement garnie")
     + f"""
 <section class="stack" aria-label="Nos ingrédients">
-  <article class="stack-card sc-choco">
+  <article class="stack-card sc-choco" data-n="01">
     <div class="stack-photo">{img(r, "tablette-chocolat", "Tablette de chocolat de couverture")}</div>
     <div class="stack-txt"><p class="stack-count">1 / 4</p><h2>Le chocolat</h2><p>Du chocolat de couverture, travaillé et tempéré chez nous pour les coques, les ganaches et les décors. C'est lui qui donne le croquant net d'un trompe-l'œil et la longueur en bouche d'un entremets.</p></div>
   </article>
-  <article class="stack-card sc-fruits">
+  <article class="stack-card sc-fruits" data-n="02">
     <div class="stack-photo">{img(r, "tarte-figue", "Tarte garnie de figues fraîches")}</div>
     <div class="stack-txt"><p class="stack-count">2 / 4</p><h2>Les fruits</h2><p>Des fruits frais, choisis mûrs, et des purées de fruits sans arôme ajouté. Fraise, framboise, figue, mangue, citron : la carte suit les saisons, parce qu'un fruit hors saison n'a pas de goût.</p></div>
   </article>
-  <article class="stack-card sc-secs">
+  <article class="stack-card sc-secs" data-n="03">
     <div class="stack-photo">{img(r, "pistache-mains", "Cœur coulant à la pistache")}</div>
     <div class="stack-txt"><p class="stack-count">3 / 4</p><h2>Les fruits secs</h2><p>Pistache, noisette, amande, cacahuète. Nous les torréfions et préparons nos pralinés nous-mêmes pour obtenir ce goût profond, impossible à imiter.</p></div>
   </article>
-  <article class="stack-card sc-creme">
+  <article class="stack-card sc-creme" data-n="04">
     <div class="stack-photo">{img(r, "saint-honore", "Crème pochée sur un saint-honoré")}</div>
     <div class="stack-txt"><p class="stack-count">4 / 4</p><h2>Le beurre, la crème, les œufs</h2><p>Du vrai beurre, de la crème entière et de la vanille en gousse. Pas de préparation en poudre, pas de mélange tout prêt : nos crèmes sont montées chaque jour.</p></div>
   </article>
