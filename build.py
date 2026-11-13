@@ -246,13 +246,13 @@ pages["index.html"] = layout(
 <section class="chef">
   <div class="wrap chef-in">
     <div class="chef-video">
-      <video src="assets/chef.mp4" poster="images/chef-video.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Béchir Hamed au travail dans le laboratoire"></video>
+      <video src="assets/chef.mp4" poster="images/chef-video.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Un pâtissier de L'Arbre à Pain au travail dans le laboratoire"></video>
       {SEAL}
     </div>
     <div class="chef-txt">
-      <h2>Béchir Hamed, 28 ans de pâtisserie dans les mains</h2>
-      <p>Derrière chaque vitrine, il y a un artisan présent au quotidien. Pâtissier reconnu à l'international et formateur, Béchir Hamed transmet son métier autant qu'il le pratique. Sa règle n'a pas changé depuis ses débuts : si ce n'est pas beau et bon à la fois, ça ne sort pas du laboratoire.</p>
-      <a class="btn btn-gold" href="bechir-hamed.html">Rencontrer le chef</a>
+      <h2>Une équipe formée par Béchir Hamed</h2>
+      <p>Nos pâtissiers ont appris leurs gestes auprès de Béchir Hamed, pâtissier formateur reconnu à l'international, avec 28 ans de métier. Ce sont eux qui réalisent chaque jour les créations de la vitrine, avec la règle qu'il leur a transmise : si ce n'est pas beau et bon à la fois, ça ne sort pas du laboratoire.</p>
+      <a class="btn btn-gold" href="bechir-hamed.html">Découvrir notre formateur</a>
     </div>
   </div>
 </section>
@@ -416,40 +416,39 @@ pages["boulangerie-tradition.html"] = layout(
 chef_insta = f'<p><a class="btn btn-line dark" href="{INSTA_CHEF}" target="_blank" rel="noopener">Suivre Béchir Hamed sur Instagram</a></p>' if INSTA_CHEF else ""
 pages["bechir-hamed.html"] = layout(
     "bechir-hamed.html",
-    "Béchir Hamed, pâtissier et formateur | L'Arbre à Pain",
-    "28 ans d'expérience, une reconnaissance internationale et le goût de transmettre : découvrez Béchir Hamed, le pâtissier formateur derrière les créations de L'Arbre à Pain.",
-    page_hero(r, "Béchir Hamed, pâtissier et formateur", "28 ans de métier, des créations reconnues bien au-delà de la Provence, et toujours la même envie : apprendre, refaire, transmettre.", "chef-gateau", "Béchir Hamed présentant un saint-honoré")
+    "Béchir Hamed, le formateur de notre équipe | L'Arbre à Pain",
+    "28 ans d'expérience, une reconnaissance internationale et le goût de transmettre : découvrez Béchir Hamed, le pâtissier formateur qui a formé l'équipe de L'Arbre à Pain.",
+    page_hero(r, "Béchir Hamed, notre formateur", "28 ans de métier, une reconnaissance bien au-delà de la Provence, et une équipe qu'il a formée aux gestes de la pâtisserie fine.", "chef-gateau", "Saint-honoré présenté au laboratoire")
     + f"""
 <section class="sec">
   <div class="wrap split">
     <div class="vframe">
-      <video src="assets/artisan.mp4" poster="images/artisan-video.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Glaçage d'un entremets tout chocolat par Béchir Hamed"></video>
+      <video src="assets/artisan.mp4" poster="images/artisan-video.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Glaçage d'un entremets tout chocolat au laboratoire"></video>
     </div>
     <div>
-      <h2>Un artisan, tous les jours au laboratoire</h2>
-      <p>Béchir Hamed n'a jamais quitté le plan de travail. Depuis 28 ans, il pétrit, tempère, poche et glace, avec une idée fixe : une pâtisserie doit donner envie avant même d'être goûtée, et tenir sa promesse à la première bouchée.</p>
-      <p>C'est cette exigence qui a donné naissance aux trompe-l'œil de la maison. Des fruits plus vrais que nature, travaillés comme des sculptures, mais pensés d'abord pour le goût.</p>
+      <h2>Ce qu'il a transmis à l'équipe</h2>
+      <p>Au laboratoire de L'Arbre à Pain, ce sont nos pâtissiers qui pétrissent, tempèrent, pochent et glacent chaque jour. Ces gestes, ils les ont appris auprès de Béchir Hamed, avec une idée fixe : une pâtisserie doit donner envie avant même d'être goûtée, et tenir sa promesse à la première bouchée.</p>
+      <p>C'est cette exigence qui guide aujourd'hui les trompe-l'œil de la maison, réalisés par notre équipe : des fruits plus vrais que nature, travaillés comme des sculptures, mais pensés d'abord pour le goût.</p>
       <blockquote>« Le visuel attire. Le goût fait revenir. Il faut les deux, sinon ce n'est pas de la pâtisserie. »</blockquote>
     </div>
   </div>
 </section>
 <section class="sec sec-tint">
   <div class="wrap split">
-    <div class="duo rect">
-      {arch(r, "chef-geste", "Glaçage d'un entremets au laboratoire")}
-      {arch(r, "chocolat-coule", "Travail du chocolat sur marbre", "down")}
+    <div class="rect">
+      {arch(r, "bechir-hamed", "Portrait de Béchir Hamed, pâtissier formateur, bras croisés", "portrait")}
     </div>
     <div>
       <h2>Le formateur</h2>
       <p>Reconnu à l'international pour son travail, Béchir Hamed partage aujourd'hui son savoir-faire avec des professionnels et des passionnés. Trompe-l'œil, entremets, travail du chocolat, pochage : il enseigne les gestes, mais surtout la méthode et la rigueur qui vont avec.</p>
-      <p>Former, pour lui, c'est aussi continuer à apprendre. Chaque technique montrée est d'abord une technique pratiquée chaque jour en boutique.</p>
+      <p>C'est lui qui a formé l'équipe de L'Arbre à Pain. Les trompe-l'œil et les entremets de la maison sont réalisés chaque jour par nos pâtissiers, avec la méthode qu'il leur a transmise.</p>
       {chef_insta}
     </div>
   </div>
 </section>
 <section class="sec">
   <div class="wrap">
-    <div class="sec-head"><h2>Ce qui guide son travail</h2></div>
+    <div class="sec-head"><h2>Ce qu'il nous a transmis</h2></div>
     <div class="cols3">
       <div><h3>Le beau et le bon, ensemble</h3><p>Une création n'entre en vitrine que si elle réussit les deux.</p></div>
       <div><h3>Le fait maison, sans raccourci</h3><p>Crèmes, pâtes, inserts, glaçages : tout est fabriqué sur place.</p></div>
@@ -457,7 +456,7 @@ pages["bechir-hamed.html"] = layout(
     </div>
   </div>
 </section>
-{cta(r, "Une formation, une collaboration, une création ?", "Écrivez-nous en quelques lignes, Béchir Hamed vous répondra.")}""",
+{cta(r, "Une question, une création ?", "Écrivez-nous en quelques lignes, nous vous répondrons rapidement.")}""",
 )
 
 # ------------------------------------------------------------- INGREDIENTS
@@ -656,7 +655,7 @@ pages["journal/index.html"] = layout(
 )
 for a in ARTICLES:
     ld = {"@context": "https://schema.org", "@type": "Article", "headline": a["titre"], "datePublished": a["date"],
-          "image": f'{SITE_URL}/images/{a["photo"]}.jpg', "author": {"@type": "Person", "name": "Béchir Hamed"},
+          "image": f'{SITE_URL}/images/{a["photo"]}.jpg', "author": {"@type": "Organization", "name": "Maison L'Arbre à Pain"},
           "publisher": {"@type": "Organization", "name": "Maison L'Arbre à Pain"}}
     pages[f'journal/{a["slug"]}.html'] = layout(
         f'journal/{a["slug"]}.html',

@@ -313,6 +313,8 @@ blockquote{margin:2.2rem 0;padding:0 0 0 1.4rem;border-left:2px solid var(--gold
 /* Photos rectangulaires */
 .rect .arch{border-radius:14px}
 .rect .arch img{border-radius:11px}
+.arch.portrait{aspect-ratio:4/5;max-width:440px;width:100%;margin-inline:auto}
+.arch.portrait img{object-position:center 30%}
 
 /* ---------- Ingrédients : cartes qui s'empilent au défilement ---------- */
 .stack{--h:calc(100svh - 70px);position:relative;background:var(--cocoa)}
