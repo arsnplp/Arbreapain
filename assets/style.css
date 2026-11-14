@@ -423,3 +423,27 @@ blockquote{margin:2.2rem 0;padding:0 0 0 1.4rem;border-left:2px solid var(--gold
   .reel-head{grid-template-columns:1fr;gap:.7rem}
   .reel-track .shot{width:46vw}
 }
+
+/* Collection trompe-l'œil : bandeau défilant infini */
+#profiter{scroll-margin-top:70px}
+.band-sec{background:var(--sand);padding-block:clamp(3.5rem,8vw,6.5rem);overflow:hidden;text-align:center}
+.band-eyebrow{font-size:.78rem;font-weight:500;letter-spacing:.34em;text-transform:uppercase;color:#8A6B17;margin:0 auto 1.4rem;padding-left:.34em}
+.band-sec h2{font-size:clamp(2rem,4.6vw,3.6rem);margin-bottom:.45em;text-wrap:balance}
+.band-lead{color:#6B564A;font-size:1.1rem;max-width:46ch;margin:0 auto}
+.band{--h:clamp(96px,13vw,168px);margin-top:clamp(2.2rem,5vw,3.6rem);background:var(--cream);border-block:1px solid rgba(212,175,55,.6);padding-block:clamp(1.3rem,2.6vw,2.2rem);overflow:hidden}
+.band-track{list-style:none;margin:0;padding:0;display:flex;width:max-content;animation:bandRun 75s linear infinite;will-change:transform}
+.band-track li{display:flex;align-items:center;flex:none;gap:clamp(1.4rem,3vw,2.8rem);padding-right:clamp(1.4rem,3vw,2.8rem)}
+.band-track img{height:var(--h);width:var(--h);object-fit:contain;filter:drop-shadow(0 12px 14px rgba(43,24,16,.16));user-select:none;-webkit-user-drag:none}
+.band-track li:nth-child(odd) img{transform:rotate(-5deg)}
+.band-track li:nth-child(even) img{transform:rotate(4deg)}
+.band-track span{font-family:var(--display);font-style:italic;font-weight:400;font-size:clamp(1.9rem,4.4vw,3.4rem);line-height:1;white-space:nowrap;color:#B8922A}
+@keyframes bandRun{to{transform:translateX(-50%)}}
+.band-foot{margin-top:clamp(1.8rem,4vw,2.6rem)}
+.band-more{display:inline-block;color:var(--terra-deep);font-weight:500;text-decoration:underline;text-decoration-color:var(--gold);text-decoration-thickness:2px;text-underline-offset:6px}
+.band-more span{display:inline-block;transition:transform .25s}
+.band-more:hover span{transform:translateX(5px)}
+@media (prefers-reduced-motion:reduce){
+  .band{overflow-x:auto}
+  .band-track{animation:none}
+  .band-track li[aria-hidden]{display:none}
+}

@@ -301,6 +301,35 @@ pages["index.html"] = layout(
 )
 
 # ------------------------------------------------------------- TROMPE-L'OEIL
+# Le bandeau défilant : fichier (images/collection/<fichier>.webp) et mot affiché en or.
+COLLECTION = [
+    ("citron", "Citron"), ("poire-verte", "Poire"), ("noix", "Noix"),
+    ("fruit-rouge", "Fruit rouge"), ("peche", "Pêche"), ("cacahuete", "Cacahuète"),
+    ("vanille", "Vanille"), ("abricot", "Abricot"), ("fraise", "Fraise"),
+]
+
+
+def collection(root):
+    def serie(hidden):
+        h = ' aria-hidden="true"' if hidden else ""
+        out = ""
+        for slug, mot in COLLECTION:
+            alt = "" if hidden else f"Trompe-l'œil {mot.lower()}"
+            out += f'<li{h}><img src="{root}images/collection/{slug}.webp" alt="{e(alt)}" width="840" height="840" loading="lazy" decoding="async"><span>{e(mot)}</span></li>'
+        return out
+    return f"""<section class="band-sec" id="collection" aria-labelledby="band-title">
+  <div class="wrap band-head">
+    <p class="band-eyebrow">La collection</p>
+    <h2 id="band-title">Ça ressemble à un fruit.<br>C'est un gâteau.</h2>
+    <p class="band-lead">Neuf créations façonnées à la main, qui trompent l'œil avant de régaler le palais.</p>
+  </div>
+  <div class="band">
+    <ul class="band-track">{serie(False)}{serie(True)}</ul>
+  </div>
+  <div class="wrap band-foot"><a class="band-more" href="#profiter">Découvrir en boutique <span aria-hidden="true">→</span></a></div>
+</section>"""
+
+
 pages["trompe-l-oeil.html"] = layout(
     "trompe-l-oeil.html",
     "Pâtisserie trompe-l'œil à Aix-en-Provence et Mimet | L'Arbre à Pain",
@@ -320,18 +349,8 @@ pages["trompe-l-oeil.html"] = layout(
     </div>
   </div>
 </section>
-<section class="sec sec-tint">
-  <div class="wrap">
-    <div class="sec-head"><h2>La collection</h2><p>Elle change avec les saisons et les envies du chef. Voici quelques créations passées en vitrine. Touchez une photo pour l'agrandir.</p></div>
-    {gallery(r, [
-      ("trompe-fraise", "Trompe-l'œil fraise"), ("trompe-citron-mangue", "Trompe-l'œil citron et mangue"), ("trompe-peche-noisette", "Trompe-l'œil pêche et noisette"),
-      ("trompe-cacahuete-framboise", "Trompe-l'œil cacahuète, fève de cacao et framboise"), ("trompe-pomme", "Trompe-l'œil pomme"), ("trompe-fruits-brillants", "Trompe-l'œil fruits brillants"),
-      ("trompe-kiwi", "Trompe-l'œil kiwi"), ("trompe-prunes", "Trompe-l'œil prune et mangue"), ("trompe-orange-mangue", "Trompe-l'œil orange"),
-      ("trompe-fraise-assiette", "Trompe-l'œil fraise sur assiette"), ("trompe-assortiment", "Assortiment de trompe-l'œil"), ("vitrine-longue", "Vitrine de trompe-l'œil"),
-    ])}
-  </div>
-</section>
-<section class="sec">
+{collection(r)}
+<section class="sec" id="profiter">
   <div class="wrap">
     <div class="sec-head"><h2>Comment en profiter</h2></div>
     <div class="cols3">
@@ -339,6 +358,17 @@ pages["trompe-l-oeil.html"] = layout(
       <div><h3>En coffret à offrir</h3><p>Un assortiment de plusieurs fruits, à commander à l'avance. Idéal pour un dîner, un remerciement ou un cadeau qui fait parler.</p></div>
       <div><h3>En format XL</h3><p>Le trompe-l'œil à partager, en pièce centrale d'un anniversaire ou d'une réception. Sur commande et sur devis.</p></div>
     </div>
+  </div>
+</section>
+<section class="sec sec-tint">
+  <div class="wrap">
+    <div class="sec-head"><h2>En vitrine</h2><p>La sélection change avec les saisons et les envies du chef. Voici quelques créations passées en vitrine. Touchez une photo pour l'agrandir.</p></div>
+    {gallery(r, [
+      ("trompe-fraise", "Trompe-l'œil fraise"), ("trompe-citron-mangue", "Trompe-l'œil citron et mangue"), ("trompe-peche-noisette", "Trompe-l'œil pêche et noisette"),
+      ("trompe-cacahuete-framboise", "Trompe-l'œil cacahuète, fève de cacao et framboise"), ("trompe-pomme", "Trompe-l'œil pomme"), ("trompe-fruits-brillants", "Trompe-l'œil fruits brillants"),
+      ("trompe-kiwi", "Trompe-l'œil kiwi"), ("trompe-prunes", "Trompe-l'œil prune et mangue"), ("trompe-orange-mangue", "Trompe-l'œil orange"),
+      ("trompe-fraise-assiette", "Trompe-l'œil fraise sur assiette"), ("trompe-assortiment", "Assortiment de trompe-l'œil"), ("vitrine-longue", "Vitrine de trompe-l'œil"),
+    ])}
   </div>
 </section>
 {cta(r, "Envie d'un coffret ou d'un trompe-l'œil XL ?", "Indiquez-nous la date et le nombre de personnes, nous vous disons ce qui est possible.")}""",

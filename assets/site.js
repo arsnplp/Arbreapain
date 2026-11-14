@@ -178,3 +178,23 @@ if (reelRows.length) {
     slide();
   }
 }
+
+// Trompe-l'œil : le bandeau défilant ralentit en douceur au survol
+const bandEl = document.querySelector('.band');
+if (bandEl) {
+  const run = bandEl.querySelector('.band-track').getAnimations?.()[0];
+  if (run) {
+    let rate = 1;
+    let goal = 1;
+    let raf = 0;
+    const tick = () => {
+      rate += (goal - rate) * 0.08;
+      if (Math.abs(goal - rate) < 0.01) rate = goal;
+      run.playbackRate = rate;
+      raf = rate === goal ? 0 : requestAnimationFrame(tick);
+    };
+    const aim = (v) => { goal = v; if (!raf) raf = requestAnimationFrame(tick); };
+    bandEl.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') aim(0.25); });
+    bandEl.addEventListener('pointerleave', () => aim(1));
+  }
+}
