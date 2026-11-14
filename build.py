@@ -12,6 +12,7 @@ PHONE = ""                                     # ex. "04 42 00 00 00" (vide = ma
 EMAIL = ""                                     # ex. "contact@arbreapain.fr" (vide = masqué)
 INSTA = "https://www.instagram.com/boulangerie_l_arbre_a_pain/"
 INSTA_CHEF = ""                                # Instagram de Béchir Hamed (vide = masqué)
+TEAM_PHOTO = ""                                # photo d'équipe : nom du fichier dans images/ sans .jpg, ex. "equipe" (vide = cadre « à venir »)
 BRAND = "L'Arbre à Pain"
 SHOPS = [
     {"ville": "Mimet", "adresse": "Parking Intermarché", "cp": "13105", "maps": "https://www.google.com/maps/search/?api=1&query=L%27Arbre+%C3%A0+Pain+Mimet"},
@@ -36,7 +37,7 @@ NAV = [
     ("trompe-l-oeil.html", "Trompe-l'œil"),
     ("patisserie-evenement.html", "Événements"),
     ("boulangerie-tradition.html", "Tradition"),
-    ("bechir-hamed.html", "Béchir Hamed"),
+    ("equipe.html", "L'équipe"),
     ("ingredients.html", "Ingrédients"),
     ("journal/", "Recettes"),
 ]
@@ -126,7 +127,7 @@ def layout(path, title, desc, body, root="", cls=""):
         <li><a href="{root}trompe-l-oeil.html">Trompe-l'œil</a></li>
         <li><a href="{root}patisserie-evenement.html">Pâtisserie d'événement</a></li>
         <li><a href="{root}boulangerie-tradition.html">Tradition, salé et sucré</a></li>
-        <li><a href="{root}bechir-hamed.html">Béchir Hamed</a></li>
+        <li><a href="{root}equipe.html">L'équipe</a></li>
         <li><a href="{root}ingredients.html">Nos ingrédients</a></li>
         <li><a href="{root}journal/">Recettes et journal</a></li>
         <li><a href="{root}contact.html">Contact et devis</a></li>
@@ -156,6 +157,19 @@ def gallery(root, items):
     return '<div class="gallery">' + "".join(
         f'<button class="shot" type="button" aria-label="Agrandir : {e(alt)}">{img(root, n, alt)}</button>' for n, alt in items
     ) + "</div>"
+
+
+def photo_hero(root, titre, intro, photo, alt, pos="left", liens=()):
+    """En-tête plein écran : photo en fond, texte par-dessus. pos = "left" (texte à gauche) ou "bottom" (texte centré en bas)."""
+    intro = intro.replace(" :", "\u00a0:").replace(" ?", "\u00a0?")  # pas de « : » seul en début de ligne
+    ls = "".join(f'<a class="phot-link" href="{h}">{t}</a>' for t, h in liens)
+    ls = f'<p class="phot-links">{ls}</p>' if ls else ""
+    return f"""<section class="phot phot-{pos}">
+  <img class="phot-img" src="{root}images/{photo}.jpg" alt="{e(alt)}" fetchpriority="high">
+  <div class="wrap phot-in">
+    <div class="phot-txt"><h1>{titre}</h1><p class="lead">{intro}</p>{ls}</div>
+  </div>
+</section>"""
 
 
 def page_hero(root, titre, intro, photo, alt, kicker=""):
@@ -198,7 +212,7 @@ pages["index.html"] = layout(
 
 <section class="sec sec-terra">
   <div class="wrap">
-    <div class="sec-head">
+    <div class="sec-head sec-head-center">
       <h2>Trois savoir-faire, une même exigence</h2>
       <p>Le visuel compte autant que le goût. Chaque création est dessinée, montée et finie à la main dans notre laboratoire.</p>
     </div>
@@ -252,7 +266,7 @@ pages["index.html"] = layout(
     <div class="chef-txt">
       <h2>Une équipe formée par Béchir Hamed</h2>
       <p>Nos pâtissiers ont appris leurs gestes auprès de Béchir Hamed, pâtissier formateur reconnu à l'international, avec 28 ans de métier. Ce sont eux qui réalisent chaque jour les créations de la vitrine, avec la règle qu'il leur a transmise : si ce n'est pas beau et bon à la fois, ça ne sort pas du laboratoire.</p>
-      <a class="btn btn-gold" href="bechir-hamed.html">Découvrir notre formateur</a>
+      <a class="btn btn-gold" href="equipe.html#formateur">Découvrir notre formateur</a>
     </div>
   </div>
 </section>
@@ -301,7 +315,7 @@ pages["index.html"] = layout(
 )
 
 # ------------------------------------------------------------- TROMPE-L'OEIL
-# Le bandeau défilant : fichier (images/collection/<fichier>.webp) et mot affiché en or.
+# La collection en arc : fichier (images/collection/<fichier>.webp) et nom affiché.
 COLLECTION = [
     ("citron", "Citron"), ("poire-verte", "Poire"), ("noix", "Noix"),
     ("fruit-rouge", "Fruit rouge"), ("peche", "Pêche"), ("cacahuete", "Cacahuète"),
@@ -310,23 +324,28 @@ COLLECTION = [
 
 
 def collection(root):
-    def serie(hidden):
-        h = ' aria-hidden="true"' if hidden else ""
-        out = ""
-        for slug, mot in COLLECTION:
-            alt = "" if hidden else f"Trompe-l'œil {mot.lower()}"
-            out += f'<li{h}><img src="{root}images/collection/{slug}.webp" alt="{e(alt)}" width="840" height="840" loading="lazy" decoding="async"><span>{e(mot)}</span></li>'
-        return out
-    return f"""<section class="band-sec" id="collection" aria-labelledby="band-title">
-  <div class="wrap band-head">
-    <p class="band-eyebrow">La collection</p>
-    <h2 id="band-title">Ça ressemble à un fruit.<br>C'est un gâteau.</h2>
-    <p class="band-lead">Neuf créations façonnées à la main, qui trompent l'œil avant de régaler le palais.</p>
+    items = ""
+    for slug, mot in COLLECTION:
+        items += f'<li class="arc-item" data-nom="{e(mot)}"><span class="arc-float"><img src="{root}images/collection/{slug}.webp" alt="Trompe-l\'œil {e(mot.lower())}" width="840" height="840" decoding="async" draggable="false"></span></li>'
+    arrow = '<svg viewBox="0 0 48 16" width="48" height="16" aria-hidden="true"><path d="M0 8h46M39 1l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1"/></svg>'
+    return f"""<section class="arc-sec" id="collection" aria-labelledby="arc-title">
+  <div class="wrap arc-head">
+    <p class="arc-eyebrow">La collection</p>
+    <h2 id="arc-title">Ça se savoure d'abord<br>avec les yeux.</h2>
+    <p class="arc-lead">Neuf créations façonnées à la main, aussi bonnes que belles.</p>
   </div>
-  <div class="band">
-    <ul class="band-track">{serie(False)}{serie(True)}</ul>
+  <div class="arc" role="group" aria-roledescription="carrousel" aria-label="Les trompe-l'œil de la collection. Faites glisser ou utilisez les flèches." tabindex="0">
+    <ul class="arc-track">{items}</ul>
   </div>
-  <div class="wrap band-foot"><a class="band-more" href="#profiter">Découvrir en boutique <span aria-hidden="true">→</span></a></div>
+  <div class="wrap arc-foot">
+    <div class="arc-nav">
+      <button class="arc-btn arc-prev" type="button" aria-label="Création précédente">{arrow}</button>
+      <p class="arc-nom" aria-live="polite">{e(COLLECTION[0][1])}</p>
+      <button class="arc-btn arc-next" type="button" aria-label="Création suivante">{arrow}</button>
+    </div>
+    <p class="arc-hint">Faites glisser pour parcourir la collection</p>
+    <a class="arc-more" href="#profiter">Découvrir en boutique <span aria-hidden="true">→</span></a>
+  </div>
 </section>"""
 
 
@@ -334,14 +353,20 @@ pages["trompe-l-oeil.html"] = layout(
     "trompe-l-oeil.html",
     "Pâtisserie trompe-l'œil à Aix-en-Provence et Mimet | L'Arbre à Pain",
     "Pêche, citron, mangue, fraise, noisette : nos trompe-l'œil signature sont des desserts plus vrais que nature. À l'unité, en coffret ou en format XL sur commande.",
-    page_hero(r, "Le trompe-l'œil, notre signature", "Un citron qui n'est pas un citron. Une cacahuète grande comme la main. Des desserts sculptés pour surprendre l'œil, puis le palais.", "trompe-vitrine", "Vitrine de trompe-l'œil de L'Arbre à Pain : fraises, pêches, mangues, cacahuètes et cabosses")
+    photo_hero(r, "Le trompe-l'œil,<br>notre signature", "Un citron qui n'est pas un citron. Une cacahuète grande comme la main. Des desserts sculptés pour surprendre l'œil, puis le palais.", "hero-trompe", "Vitrine de trompe-l'œil et de pâtisseries individuelles de L'Arbre à Pain", "left", [("Découvrir nos créations", "#collection")])
     + f"""
 <section class="sec">
   <div class="wrap split">
     <div>
-      <h2>Comment naît un trompe-l'œil</h2>
-      <p>Tout commence par le fruit lui-même. On observe sa forme, sa peau, ses nuances, puis on le reconstruit en pâtisserie : une mousse légère, un cœur coulant ou croquant, une fine coque et un velours de couleur posé au pistolet.</p>
-      <p>Le résultat doit tenir deux promesses. À l'œil, on doit hésiter. En bouche, le goût annoncé doit être là, franc et net : la mangue a le goût de la mangue, la noisette celui de la noisette.</p>
+      <h2>Comment naît <span class="nowrap">un trompe-l'œil</span></h2>
+      <p class="born-lead">Tout part du vrai fruit. On étudie sa forme, sa peau, ses nuances, puis on le reconstruit en pâtisserie, couche après couche.</p>
+      <ol class="born-steps">
+        <li><h3>Le cœur</h3><p>Coulant ou croquant, c'est la surprise à la découpe.</p></li>
+        <li><h3>La mousse</h3><p>Légère, elle porte le parfum du fruit.</p></li>
+        <li><h3>La coque</h3><p>Fine, elle dessine la silhouette.</p></li>
+        <li><h3>Le velours</h3><p>La couleur, posée au pistolet.</p></li>
+      </ol>
+      <p class="born-promise">À l'œil, on hésite. En bouche, plus de doute : la mangue a le goût de la mangue, la noisette celui de la noisette.</p>
     </div>
     <div class="duo">
       {arch(r, "trompe-mangue-coupee", "Trompe-l'œil mangue ouvert, cœur coulant")}
@@ -379,7 +404,7 @@ pages["patisserie-evenement.html"] = layout(
     "patisserie-evenement.html",
     "Gâteaux sur mesure pour événements à Aix-en-Provence | L'Arbre à Pain",
     "Anniversaire, mariage, baptême, événement d'entreprise : entremets, gâteaux personnalisés et buffets sucrés sur mesure près d'Aix-en-Provence, Gardanne et Marseille. Devis rapide.",
-    page_hero(r, "Pâtisserie fine pour vos événements", "Le gâteau, c'est le moment où tout le monde sort son téléphone. Autant qu'il soit à la hauteur, et qu'il soit aussi bon que beau.", "entremets-rouge-design", "Entremets rouge au décor graphique")
+    photo_hero(r, "Pâtisserie fine pour vos événements", "Le gâteau, c'est le moment où tout le monde sort son téléphone. Autant qu'il soit à la hauteur, et qu'il soit aussi bon que beau.", "hero-evenements", "Entremets rouge au décor de pétales en chocolat", "bottom", [("Demander un devis", "contact.html")])
     + f"""
 <section class="sec">
   <div class="wrap">
@@ -422,9 +447,9 @@ pages["boulangerie-tradition.html"] = layout(
     "boulangerie-tradition.html",
     "Boulangerie pâtisserie artisanale à Mimet et Aix-en-Provence | L'Arbre à Pain",
     "Pains, viennoiseries, éclairs, tartes, sandwichs et focaccias : la boulangerie pâtisserie artisanale de L'Arbre à Pain, 100 % fait maison, à Mimet et Aix-en-Provence.",
-    page_hero(r, "La tradition, le salé et le sucré", "Avant d'être une maison de trompe-l'œil, nous sommes une boulangerie pâtisserie. Le pain du matin, l'éclair de quatre heures et le déjeuner sur le pouce comptent autant que le reste.", "baguettes", "Baguettes de tradition sorties du four")
+    photo_hero(r, "La tradition, le salé et le sucré", "Avant d'être une maison de trompe-l'œil, nous sommes une boulangerie pâtisserie. Le pain du matin, l'éclair de quatre heures et le déjeuner sur le pouce comptent autant que le reste.", "hero-tradition", "Baguettes de tradition sorties du four", "bottom", [("Découvrir notre maison", "#maison")])
     + f"""
-<section class="reel" aria-label="Ce que vous trouvez en boutique">
+<section class="reel" id="maison" aria-label="Ce que vous trouvez en boutique">
   <article class="reel-row">
     <div class="wrap reel-head"><h2>Pâtisserie traditionnelle</h2><p>Éclairs, saint-honorés, tartes aux fruits, flans, macarons garnis. Les classiques français, avec le même soin de finition que nos créations les plus spectaculaires.</p></div>
     <div class="reel-strip"><div class="reel-track"><button class="shot" type="button" aria-label="Agrandir : {e("Éclairs au chocolat et au café")}">{img(r, "eclairs", "Éclairs au chocolat et au café")}</button><button class="shot" type="button" aria-label="Agrandir : {e("Saint-honoré")}">{img(r, "saint-honore", "Saint-honoré")}</button><button class="shot" type="button" aria-label="Agrandir : {e("Tartelettes aux fruits")}">{img(r, "tartelettes", "Tartelettes aux fruits")}</button><button class="shot" type="button" aria-label="Agrandir : {e("Macaron framboise")}">{img(r, "ispahan", "Macaron framboise")}</button><button class="shot" type="button" aria-label="Agrandir : {e("Tartes aux fraises")}">{img(r, "tartes-vitrine", "Tartes aux fraises")}</button><button class="shot" type="button" aria-label="Agrandir : {e("Choux au chocolat")}">{img(r, "choux-chocolat", "Choux au chocolat")}</button><button class="shot" type="button" aria-label="Agrandir : {e("Verrines aux fruits")}">{img(r, "verrines", "Verrines aux fruits")}</button></div></div>
@@ -442,14 +467,41 @@ pages["boulangerie-tradition.html"] = layout(
     cls="page-tradition",
 )
 
-# ------------------------------------------------------------- BECHIR HAMED
+# ------------------------------------------------------------- L'EQUIPE (et Béchir Hamed, son formateur)
 chef_insta = f'<p><a class="btn btn-line dark" href="{INSTA_CHEF}" target="_blank" rel="noopener">Suivre Béchir Hamed sur Instagram</a></p>' if INSTA_CHEF else ""
-pages["bechir-hamed.html"] = layout(
-    "bechir-hamed.html",
-    "Béchir Hamed, le formateur de notre équipe | L'Arbre à Pain",
-    "28 ans d'expérience, une reconnaissance internationale et le goût de transmettre : découvrez Béchir Hamed, le pâtissier formateur qui a formé l'équipe de L'Arbre à Pain.",
-    page_hero(r, "Béchir Hamed, notre formateur", "28 ans de métier, une reconnaissance bien au-delà de la Provence, et une équipe qu'il a formée aux gestes de la pâtisserie fine.", "chef-gateau", "Saint-honoré présenté au laboratoire")
+if TEAM_PHOTO:
+    team_photo = f'<figure class="team-photo">{img(r, TEAM_PHOTO, "L\'équipe de L\'Arbre à Pain réunie")}</figure>'
+else:
+    team_photo = '<div class="team-photo team-empty" role="img" aria-label="Emplacement de la photo d\'équipe, à venir"><span class="mono" aria-hidden="true">AP</span><p>Photo d\'équipe à venir</p></div>'
+pages["equipe.html"] = layout(
+    "equipe.html",
+    "L'équipe de L'Arbre à Pain et son formateur Béchir Hamed | L'Arbre à Pain",
+    "Au fournil, au laboratoire et en boutique : découvrez l'équipe de L'Arbre à Pain, à Mimet et Aix-en-Provence, et Béchir Hamed, le pâtissier qui l'a formée.",
+    photo_hero(r, "L'équipe de<br>L'Arbre à Pain", "Au fournil, au laboratoire et en boutique : celles et ceux qui font la maison chaque jour, et le pâtissier qui les a formés.", "hero-equipe", "Saint-honoré présenté au laboratoire par un pâtissier", "left", [("Rencontrer l'équipe", "#equipe"), ("Découvrir notre formateur", "#formateur")])
     + f"""
+<section class="sec" id="equipe">
+  <div class="wrap team">
+    <div class="team-txt">
+      <h2>Une équipe, <span class="nowrap">trois métiers</span></h2>
+      <p>Derrière chaque vitrine, il y a des mains. Celles qui pétrissent et façonnent le pain au fournil, celles qui montent, pochent et glacent les pâtisseries au laboratoire, et celles qui vous accueillent en boutique, à Mimet comme à Aix-en-Provence.</p>
+      <p>Tout ce que vous voyez en vitrine est fait par cette équipe, sur place, chaque jour.</p>
+    </div>
+    {team_photo}
+  </div>
+</section>
+<section class="sec sec-tint" id="formateur">
+  <div class="wrap split">
+    <div class="rect">
+      {arch(r, "bechir-hamed", "Portrait de Béchir Hamed, pâtissier formateur, bras croisés", "portrait")}
+    </div>
+    <div>
+      <h2>Béchir Hamed, <span class="nowrap">notre formateur</span></h2>
+      <p>Reconnu à l'international pour son travail, avec 28 ans de métier, Béchir Hamed partage aujourd'hui son savoir-faire avec des professionnels et des passionnés. Trompe-l'œil, entremets, travail du chocolat, pochage : il enseigne les gestes, mais surtout la méthode et la rigueur qui vont avec.</p>
+      <p>C'est lui qui a formé l'équipe de L'Arbre à Pain. Les trompe-l'œil et les entremets de la maison sont réalisés chaque jour par nos pâtissiers, avec la méthode qu'il leur a transmise.</p>
+      {chef_insta}
+    </div>
+  </div>
+</section>
 <section class="sec">
   <div class="wrap split">
     <div class="vframe">
@@ -464,19 +516,6 @@ pages["bechir-hamed.html"] = layout(
   </div>
 </section>
 <section class="sec sec-tint">
-  <div class="wrap split">
-    <div class="rect">
-      {arch(r, "bechir-hamed", "Portrait de Béchir Hamed, pâtissier formateur, bras croisés", "portrait")}
-    </div>
-    <div>
-      <h2>Le formateur</h2>
-      <p>Reconnu à l'international pour son travail, Béchir Hamed partage aujourd'hui son savoir-faire avec des professionnels et des passionnés. Trompe-l'œil, entremets, travail du chocolat, pochage : il enseigne les gestes, mais surtout la méthode et la rigueur qui vont avec.</p>
-      <p>C'est lui qui a formé l'équipe de L'Arbre à Pain. Les trompe-l'œil et les entremets de la maison sont réalisés chaque jour par nos pâtissiers, avec la méthode qu'il leur a transmise.</p>
-      {chef_insta}
-    </div>
-  </div>
-</section>
-<section class="sec">
   <div class="wrap">
     <div class="sec-head"><h2>Ce qu'il nous a transmis</h2></div>
     <div class="cols3">
@@ -494,8 +533,7 @@ pages["ingredients.html"] = layout(
     "ingredients.html",
     "Nos ingrédients : des matières premières de qualité | L'Arbre à Pain",
     "Vrais fruits, chocolat de couverture, pistache, beurre et crème : ce que nous mettons dans nos pâtisseries, et ce que nous refusons d'y mettre.",
-    page_hero(r, "Ce qu'il y a dans nos pâtisseries", "Une belle pâtisserie avec de mauvais ingrédients, c'est juste un décor. Nous choisissons nos matières premières avant de dessiner quoi que ce soit.", "tarte-pistache", "Tarte à la pistache généreusement garnie")
-    + f"""
+    f"""<h1 class="sr-only">Ce qu'il y a dans nos pâtisseries</h1>
 <section class="stack" aria-label="Nos ingrédients">
   <article class="stack-card sc-choco" data-n="01">
     <div class="stack-photo">{img(r, "tablette-chocolat", "Tablette de chocolat de couverture")}</div>
@@ -513,13 +551,6 @@ pages["ingredients.html"] = layout(
     <div class="stack-photo">{img(r, "saint-honore", "Crème pochée sur un saint-honoré")}</div>
     <div class="stack-txt"><p class="stack-count">4 / 4</p><h2>Le beurre, la crème, les œufs</h2><p>Du vrai beurre, de la crème entière et de la vanille en gousse. Pas de préparation en poudre, pas de mélange tout prêt : nos crèmes sont montées chaque jour.</p></div>
   </article>
-</section>
-<section class="sec sec-tint">
-  <div class="wrap narrow center">
-    <h2>100 % fait maison</h2>
-    <p>Pâtes, crèmes, inserts, glaçages, pains et viennoiseries : tout ce qui est en vitrine sort de notre laboratoire. C'est plus long, et c'est exactement pour cela que c'est meilleur.</p>
-    <p>Une allergie ou un régime particulier ? Demandez conseil en boutique ou par message avant de commander, nous vous indiquerons les créations adaptées.</p>
-  </div>
 </section>
 {cta(r)}""",
     cls="page-ingredients",
@@ -710,6 +741,10 @@ for path, content in pages.items():
     os.makedirs(os.path.dirname(full), exist_ok=True)
     with open(full, "w", encoding="utf-8") as f:
         f.write(content)
+
+# Ancienne adresse de la page : redirige vers la nouvelle
+with open(os.path.join(HERE, "bechir-hamed.html"), "w", encoding="utf-8") as f:
+    f.write('<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>L\'équipe | L\'Arbre à Pain</title><meta name="robots" content="noindex"><link rel="canonical" href="' + SITE_URL + '/equipe.html"><meta http-equiv="refresh" content="0; url=equipe.html#formateur"></head><body><p><a href="equipe.html#formateur">La page a changé d\'adresse : voir l\'équipe et Béchir Hamed</a></p></body></html>\n')
 
 urls = "".join(
     f"<url><loc>{SITE_URL}/{'' if p == 'index.html' else p.replace('index.html', '')}</loc></url>\n"

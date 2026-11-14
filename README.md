@@ -10,6 +10,7 @@ Les pages sont générées par `build.py`. Réglages en haut du fichier :
 - `SITE_URL` : domaine final
 - `PHONE`, `EMAIL` : s'affichent dans le pied de page, la page contact et le formulaire dès qu'ils sont remplis
 - `INSTA_CHEF` : Instagram de Béchir Hamed
+- `TEAM_PHOTO` : photo d'équipe de la page L'équipe (déposer `images/equipe.jpg` puis mettre `"equipe"` ; vide = cadre « Photo d'équipe à venir »)
 - `SHOPS` : adresses des boutiques
 
 Puis lancer `python3 build.py`.

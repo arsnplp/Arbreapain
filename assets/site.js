@@ -179,22 +179,115 @@ if (reelRows.length) {
   }
 }
 
-// Trompe-l'œil : le bandeau défilant ralentit en douceur au survol
-const bandEl = document.querySelector('.band');
-if (bandEl) {
-  const run = bandEl.querySelector('.band-track').getAnimations?.()[0];
-  if (run) {
-    let rate = 1;
-    let goal = 1;
-    let raf = 0;
-    const tick = () => {
-      rate += (goal - rate) * 0.08;
-      if (Math.abs(goal - rate) < 0.01) rate = goal;
-      run.playbackRate = rate;
-      raf = rate === goal ? 0 : requestAnimationFrame(tick);
-    };
-    const aim = (v) => { goal = v; if (!raf) raf = requestAnimationFrame(tick); };
-    bandEl.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') aim(0.25); });
-    bandEl.addEventListener('pointerleave', () => aim(1));
-  }
+// Trompe-l'œil : pièces flottantes en arc de cercle, à faire glisser
+const arc = document.querySelector('.arc');
+if (arc) {
+  const items = [...arc.querySelectorAll('.arc-item')];
+  const nomEl = document.querySelector('.arc-nom');
+  const n = items.length;
+  const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let pos = 0;      // position courante (peut être décimale pendant le geste)
+  let goal = 0;     // position visée
+  let raf = 0;
+  let size = 0;
+  let centre = -1;
+  arc.classList.add('arc-js');
+
+  const measure = () => { size = items[0].offsetWidth; };
+  const render = () => {
+    const step = size * 0.94;
+    let best = 0;
+    let bestD = 99;
+    items.forEach((el, i) => {
+      // écart au centre, ramené entre -n/2 et n/2 pour boucler à l'infini
+      let d = ((i - pos) % n + n) % n;
+      if (d > n / 2) d -= n;
+      const a = Math.abs(d);
+      if (a < bestD) { bestD = a; best = i; }
+      const x = step * d * (1 - 0.055 * a);
+      const y = size * 0.05 * d * d;                 // l'arc : le centre en haut, les côtés redescendent
+      const sc = Math.max(0.3, 1 - 0.21 * a);        // profondeur : plus loin = plus petit
+      const op = a <= 2.4 ? 1 : Math.max(0, 1 - (a - 2.4) / 0.9);
+      el.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) rotate(' + (d * 7).toFixed(2) + 'deg) scale(' + sc.toFixed(3) + ')';
+      el.style.opacity = op.toFixed(2);
+      el.style.zIndex = String(100 - Math.round(a * 10));
+      el.style.visibility = op === 0 ? 'hidden' : 'visible';
+    });
+    if (best !== centre) { centre = best; nomEl.textContent = items[best].dataset.nom; }
+  };
+  const tick = () => {
+    pos += (goal - pos) * (calm ? 1 : 0.11);
+    if (Math.abs(goal - pos) < 0.002) pos = goal;
+    render();
+    raf = pos === goal ? 0 : requestAnimationFrame(tick);
+  };
+  const glide = (g) => { goal = g; if (!raf) raf = requestAnimationFrame(tick); };
+
+  document.querySelector('.arc-prev').addEventListener('click', () => glide(Math.round(goal) - 1));
+  document.querySelector('.arc-next').addEventListener('click', () => glide(Math.round(goal) + 1));
+  arc.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); glide(Math.round(goal) + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); glide(Math.round(goal) - 1); }
+  });
+
+  // Glisser à la souris ou au doigt, avec un peu d'élan au lâcher
+  let down = false;
+  let x0 = 0;
+  let p0 = 0;
+  let moved = 0;
+  let lastX = 0;
+  let lastT = 0;
+  let vel = 0;
+  arc.addEventListener('pointerdown', (e) => {
+    if (e.button) return;
+    down = true; moved = 0; vel = 0;
+    x0 = lastX = e.clientX; lastT = e.timeStamp; p0 = pos;
+    cancelAnimationFrame(raf); raf = 0;
+  });
+  arc.addEventListener('pointermove', (e) => {
+    if (!down) return;
+    const dx = e.clientX - x0;
+    moved = Math.max(moved, Math.abs(dx));
+    if (moved > 6 && !arc.classList.contains('is-drag')) {
+      arc.classList.add('is-drag');
+      try { arc.setPointerCapture(e.pointerId); } catch (err) { /* sans capture, le geste reste suivi dans la zone */ }
+    }
+    const dt = e.timeStamp - lastT;
+    if (dt > 0) vel = 0.7 * vel + 0.3 * ((e.clientX - lastX) / dt);
+    lastX = e.clientX; lastT = e.timeStamp;
+    pos = goal = p0 - dx / (size * 0.94);
+    render();
+  });
+  const release = (e) => {
+    if (!down) return;
+    down = false;
+    arc.classList.remove('is-drag');
+    if (moved <= 6) {
+      // simple clic : on amène au centre la pièce visée
+      const hit = items.find((el) => {
+        const r = el.getBoundingClientRect();
+        return el.style.visibility !== 'hidden' && e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+      });
+      const order = items.filter((el) => el.style.visibility !== 'hidden').sort((a, b) => b.style.zIndex - a.style.zIndex);
+      const top = order.find((el) => {
+        const r = el.getBoundingClientRect();
+        return e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+      }) || hit;
+      if (top) {
+        let d = ((items.indexOf(top) - pos) % n + n) % n;
+        if (d > n / 2) d -= n;
+        glide(Math.round(pos + d));
+      }
+      return;
+    }
+    const throwBy = Math.max(-2.5, Math.min(2.5, (-vel * 260) / (size * 0.94)));
+    glide(Math.round(pos + throwBy));
+  };
+  arc.addEventListener('pointerup', release);
+  arc.addEventListener('pointercancel', () => { if (down) { down = false; arc.classList.remove('is-drag'); glide(Math.round(pos)); } });
+  arc.addEventListener('dragstart', (e) => e.preventDefault());
+
+  window.addEventListener('resize', () => { measure(); render(); });
+  measure();
+  render();
 }
